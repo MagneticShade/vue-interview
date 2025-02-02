@@ -1,0 +1,20 @@
+#pagination{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    *{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    #page_select{
+        width: 200px;
+    }
+
+    #on_page{
+        width: 250px;
+    }
+}

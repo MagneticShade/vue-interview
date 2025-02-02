@@ -1,0 +1,29 @@
+#tableHeader,#sort{
+    height: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    #searchDownload{
+        height: 100%;
+        width: 447px;
+        display: flex;
+        input{
+            height: 100%;
+        }
+        #download{
+            width: 147px;
+        }
+        #search{
+            width: 300px;
+            margin-right: 20px;
+        }
+    }
+}
+
+h4{
+    font-size: 32px;
+    font-family: "Gotham Pro";
+    font-weight: bold;
+}
