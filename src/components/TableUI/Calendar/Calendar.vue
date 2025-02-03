@@ -1,8 +1,9 @@
 <script setup>
 	import "./Calendar.scss";
     import Calendar from "./Calendar.js"
+	import {ref} from "vue"
     const month = ref(Calendar.month)
-	// const days = ref(Calendar.days)
+	const days = ref(Calendar.days)
 </script>
 
 <template>
