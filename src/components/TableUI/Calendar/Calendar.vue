@@ -1,9 +1,24 @@
 <script setup>
 	import "./Calendar.scss";
-    import Calendar from "./Calendar.js"
-	import {ref} from "vue"
-    const month = ref(Calendar.month)
-	const days = ref(Calendar.days)
+	import Calendar from "./Calendar.js";
+	import { onMounted, ref, useTemplateRef } from "vue";
+	import Day from "./Day/Day.vue";
+
+	const days = ref(Calendar.days);
+	const month = ref(Calendar.month);
+	const year = ref(Calendar.year);
+	const active = ref([]);
+
+	Calendar.GenerateDays();
+
+	const Activate = (index) => {
+		console.log(active.value);
+		if (active.value.length < 2) {
+			active.value.push(index);
+		} else {
+			active.value.splice(0);
+		}
+	};
 </script>
 
 <template>
@@ -17,12 +32,12 @@
 		</div>
 		<div id="month_select">
 			<div id="backward">
-                <img src="../../../assets/icons/forwardBackward.svg" alt="">
-            </div>
-			<p>{{ month }}</p>
+				<img src="../../../assets/icons/forwardBackward.svg" alt="" />
+			</div>
+			<p>{{ month }} {{ year }}</p>
 			<div id="forward">
-                <img src="../../../assets/icons/forwardBackward.svg" alt="">
-            </div>
+				<img src="../../../assets/icons/forwardBackward.svg" alt="" />
+			</div>
 		</div>
 		<div id="week_days">
 			<p>ПН</p>
@@ -34,9 +49,14 @@
 			<p>ВС</p>
 		</div>
 		<div id="days">
-			<div v-for="day in days">
-				{{ day }}
-			</div>
+			<Day
+				:day="day"
+				:index="index"
+				:-active-func="Activate"
+				:active="active"
+				v-for="(day, index) in days"
+				ref="days_ref"
+			/>
 		</div>
 		<div id="buttons">
 			<div id="close"><p>Отмена</p></div>
