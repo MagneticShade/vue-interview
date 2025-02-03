@@ -1,0 +1,79 @@
+#date_input {
+	border: 1px solid black;
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+#calendar {
+	margin-top: 10px;
+	width: 364px;
+	height: 482px;
+	border-radius: 16px;
+	background-color: #f1f4fd;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	box-sizing: border-box;
+	padding: 24px;
+}
+#prompt {
+	border-bottom: solid black 1px;
+}
+#month_select{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#week_days,
+#days {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	column-gap: 13px;
+	text-align: center;
+}
+
+#days {
+    height: 210px;
+	grid-template-rows: repeat(5, 1fr);
+	grid-template-columns: repeat(7, 1fr);
+	row-gap: 10px;
+	column-gap: 13px;
+
+	div {
+		text-align: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+	}
+}
+#buttons {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+#close,
+#confirm {
+	width: 148px;
+	height: 53px;
+	border: 1px solid black;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 10px;
+}
+#confirm {
+	background-color: #0e0e10;
+	color: #f1f4fd;
+}
+
+.active_day {
+	background-color: #33d35e;
+}
+.inactive_day {
+	color: #93939b;
+	cursor: auto;
+}

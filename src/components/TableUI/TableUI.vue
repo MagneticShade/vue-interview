@@ -1,5 +1,6 @@
 <script setup>
-    import "./TableUI.scss" 
+    import "./TableUI.scss"
+    import "./TableUI" 
 </script>
 
 <template>
@@ -7,12 +8,14 @@
         <h4>Таблица учреждений</h4>
         <div id="searchDownload">
             <input  type="text" name="" id="search">
-            <input  id="download" type="button" value="Скачать">
+            <div id="download"> 
+                <img src="../../assets/icons/Icon.svg" alt="">
+                <p>Скачать</p>
+            </div>
         </div>
     </div>
     
     <div id="sort">
-        <input type="date" name="" id="">
         <select name="" id="">
 
         </select>

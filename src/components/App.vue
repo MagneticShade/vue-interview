@@ -4,6 +4,7 @@
     import Table from "./Table/Table.vue";
     import TableUI from "./TableUI/TableUI.vue";
     import Pagination from "./Pagination/Pagination.vue";
+    import Calendar from "./TableUI/Calendar/Calendar.vue";
 </script>
 
 <template>
@@ -15,5 +16,5 @@
             <Pagination />
         </div>
     </main>
-
+    <Calendar/>
 </template>

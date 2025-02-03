@@ -4,6 +4,10 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    
+    select{
+        border-radius: 10px;
+    }
 
     #searchDownload{
         height: 100%;
@@ -11,19 +15,33 @@
         display: flex;
         input{
             height: 100%;
-        }
-        #download{
-            width: 147px;
-        }
-        #search{
-            width: 300px;
-            margin-right: 20px;
+            border-radius: 10px;
         }
     }
 }
+
+
+#download{
+    width: 147px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #16B240;
+    border-radius: 10px;
+    cursor: pointer;
+}
+#download:hover{
+    background-color: #24C14E;
+}
+#search{
+    width: 300px;
+    margin-right: 20px;
+}
+
 
 h4{
     font-size: 32px;
     font-family: "Gotham Pro";
     font-weight: bold;
 }
+
