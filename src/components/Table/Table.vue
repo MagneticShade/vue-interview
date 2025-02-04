@@ -1,5 +1,6 @@
 <script setup>
 	import "./Table.scss";
+	import TableRow from "../TableRow/TableRow.vue";
 </script>
 
 <template>
@@ -13,6 +14,7 @@
 			</tr>
 		</thead>
         <tbody>
+			<TableRow />
         </tbody>
 	</table>
 </template>
