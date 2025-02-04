@@ -1,5 +1,11 @@
 .edu_plaque{
     padding: 4px 6px;
     border-radius: 8px;
-    border: 1px solid #0E0E101A
+    border: 1px solid #0E0E101A;
+    width: fit-content;
+}
+
+.edu_plaque>p{
+    font-family: "Gotham Pro";
+    font-size: 12px;
 }
