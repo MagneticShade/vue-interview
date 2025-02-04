@@ -2,7 +2,6 @@ let date = new Date(),
 year = date.getFullYear(),
 monthN = date.getMonth();
 
-let tmp = document.querySelector("#year")
 const months = [
 	"Январь",
 	"Февраль",
@@ -40,12 +39,36 @@ function GenerateDays(){
     }
 }
 
-GenerateDays()
+function GetMonth(){
+    return months[monthN]
+}
+
+function GetDays(){
+    return days
+}
+
+function GetYear(){
+    return year
+}
+
+function ChangeMonth(){
+    
+    monthN++
+    if (monthN>11){
+        monthN =0
+        year++
+    }
+    GenerateDays()
+}
+
+GenerateDays();
+
 export default {
     GenerateDays,
-    month:months[monthN],
-    year,
-    days
+    ChangeMonth,
+    GetMonth,
+    GetYear,
+    GetDays,
 }
 
 

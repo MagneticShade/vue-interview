@@ -30,7 +30,6 @@
 #days {
 	display: grid;
 	grid-template-columns: repeat(7, 1fr);
-	column-gap: 13px;
 	text-align: center;
 }
 
@@ -38,8 +37,6 @@
     height: 210px;
 	grid-template-rows: repeat(5, 1fr);
 	grid-template-columns: repeat(7, 1fr);
-	row-gap: 10px;
-	column-gap: 13px;
 
 	div {
 		text-align: center;
