@@ -28,7 +28,7 @@
 		</td>
 		<td class="edu_level">
 			<div class="row_container">
-				<EduPlaque v-for="level in props.eduLevel" :name="level.edu_level.name" />
+				<EduPlaque v-if="props.eduLevel" v-for="level in props.eduLevel.names" :name="level" />
 			</div>
 		</td>
 	</tr>

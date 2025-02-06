@@ -6,17 +6,32 @@
     import Pagination from "./Pagination/Pagination.vue";
     import Calendar from "./TableUI/Calendar/Calendar.vue";
     import Requests from "./Requests.js"
-    import { onMounted, ref } from "vue";
+    import { onMounted, ref,watchEffect } from "vue";
 
-    let res = ref({"data":[]})
-    let schools = ref ({"data":{"list":[]}})  
-    let distr = ref({"data":[]})
+    const recordsOnPage = ref(10)
+    const page = ref(1)
+    const districtId = ref("")
+    const regionId = ref("")
+    const UpdatedAt = ref("")
+    // const dowload = ref("")
+    const res = ref({})
+    const schools = ref ({})  
+    const distr = ref({})
+
+
+    const loaded = ref(false)
+    watchEffect(async ()=>{
+        loaded.value = false
+        let response = await Requests.GetSchools(recordsOnPage,page,districtId,regionId,UpdatedAt)
+        schools.value = response
+        loaded.value = true
+    })
 
     onMounted(async()=>{
      res.value =  await   Requests.GetRegions()
-     schools.value = await  Requests.GetSchools()
      distr.value = await  Requests.GetFederalDistricts()
-     console.log(schools.value)
+     
+
     })
 
     
@@ -27,9 +42,9 @@
 	<Header />
     <main>
         <div id="container">
-            <TableUI />
-                <Table :rows="schools.data.list" />
-            <Pagination />
+            <TableUI v-if="loaded" />
+                <Table v-if="loaded" :rows="schools.data.list" />
+            <Pagination v-if="loaded" :count="schools.data.total_count" :page="schools.data.page" :onPage="recordsOnPage" :pageCount="schools.data.pages_count" v-model="recordsOnPage"/>
         </div>
     </main>
     <Calendar/>

@@ -1,3 +1,4 @@
+import { toValue } from "vue"
 const apiAdress = "https://schooldb.skillline.ru/api/"
 
 async function GetRegions() {
@@ -17,12 +18,12 @@ async function GetFederalDistricts(){
 
 async function GetSchools(count,page,districtId,regionId,updatedAt,download){
     let result = await fetch(apiAdress +"schools?"+new URLSearchParams({
-        "count":count? count:"",
-        "page": page? page:"",
-        "federal_district_id":districtId? districtId:"",
-        "region_id":regionId? regionId:"",
-        "updated_at":updatedAt? updatedAt:"",
-        "download":download? download:""
+        "count":count? toValue(count):"",
+        "page": page? toValue(page):"",
+        "federal_district_id":districtId? toValue(districtId):"",
+        "region_id":regionId? toValue(regionId):"",
+        "updated_at":updatedAt? toValue(updatedAt):"",
+        "download":download? toValue(download):""
     }).toString()).then((response)=>{
         return response.json()
     })

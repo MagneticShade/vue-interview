@@ -3,6 +3,22 @@
 	import TableRow from "../TableRow/TableRow.vue";
 	import { defineProps } from "vue";
 	const props = defineProps(["rows"]);
+
+
+	let programms = []
+	for (let key  in props.rows){
+		programms.push({"names":[]})
+		if(props.rows[key].supplements.length>0 && "educational_programs" in props.rows[key].supplements[0]){
+			
+			for( let level in props.rows[key].supplements[0].educational_programs){
+				let tmp = props.rows[key].supplements[0].educational_programs[level].edu_level.name
+				if ((! programms[programms.length-1].names.includes(tmp)) ){
+				programms[programms.length-1].names.push(tmp)
+				}
+			}
+		}
+	}
+	console.log(programms)
 </script>
 
 <template>
@@ -40,11 +56,12 @@
 		</thead>
 		<tbody>
 			<TableRow
-				:region="row.supplements[0].edu_org.region.name"
-				:name="row.supplements[0].edu_org.full_name"
-				:adress="row.supplements[0].edu_org.contact_info.post_address"
-				:eduLevel="row.supplements[0].educational_programs"
 				v-for="row in props.rows"
+				:region="row.edu_org.region.name"
+				:name="row.edu_org.full_name"
+				:adress="row.edu_org.contact_info.post_address"
+				:eduLevel="programms[props.rows.indexOf(row)]"
+				
 			/>
 		</tbody>
 	</table>
