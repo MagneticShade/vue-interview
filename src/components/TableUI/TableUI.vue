@@ -1,6 +1,7 @@
 <script setup>
     import "./TableUI.scss"
     import "./TableUI" 
+    import Calendar from "./Calendar/Calendar.vue"
 </script>
 
 <template>
@@ -19,6 +20,7 @@
         <select name="" id="">
 
         </select>
+        <Calendar  />
         <select name="" id="">
             
         </select>

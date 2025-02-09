@@ -1,78 +1,81 @@
 <script setup>
 	import "./Pagination.scss";
-	import { defineProps, defineModel, ref } from "vue";
-	const model = defineModel();
-	const props = defineProps(["count", "page", "onPage","pageCount"]);
+	import { defineProps, defineModel, computed,defineEmits } from "vue";
+	const onPageModel = defineModel("onPageModel");
+	const emit = defineEmits(['update:pageModelValue'])
+	const props = defineProps(["count", "page", "onPage","pageCount"]); 
+	const onPageValue = computed({
+		get(){
+			return props.onPage
+		},
+		set(newValue){
+			onPageModel.value = newValue;
+		}
+		
+	})
 
-	function Update(newValue) {
-		model.value = newValue;
-	}
+	const pageModelValue = computed({
+		get(){
+			return props.page
+		},
+		set(newValue){
+			emit("update:pageModelValue",newValue)
+		}
+	})
 
-	const selected = ref(props.onPage);
-	let pages =[props.page]
-	if (props.page<3){
-		for (let i =props.page-1;i>1;i--){
+
+	onPageModel.value = props.onPage
+	let pages =[pageModelValue.value]
+	if (pageModelValue.value<3){
+		for (let i =pageModelValue.value-1;i>=1;i--){
 			pages.unshift(i)
 		}
-		for (let i = props.page+1;i<4;i++){
+		for (let i = pageModelValue.value+1;i<4;i++){
 			pages.push(i)
 		}
+		pages.push("...")
+		pages.push(props.pageCount)
 	}
-	else if(!props.page<3||props.pageCount-props.pageCount<3){
-		pages.unshift(props.page -1)
-		pages.push(props.page+1)
+	else if(!(pageModelValue.value<3)&&!(props.pageCount-pageModelValue.value<3)){
+		pages.unshift(pageModelValue.value -1)
+		pages.push(pageModelValue.value+1)
+		pages.unshift("...")
+		pages.unshift(1)
+		pages.push("...")
+		pages.push(props.pageCount)
 	}
 	else{
-		for (let i =props.page-1;i>props.pageCount-3;i--){
+		for (let i =pageModelValue.value-1;i>props.pageCount-3;i--){
 			pages.unshift(i)
 		}
-		for (let i = props.page+1;i<props.pageCount;i++){
+		for (let i = pageModelValue.value+1;i<props.pageCount;i++){
 			pages.push(i)
 		}
+
+		pages.unshift("...")
+		pages.unshift(1)
 	}
-	console.log(pages)
 </script>
 
 <template>
 	<div  id="pagination">
-        <div v-if="props.page<=2"  id="page_select">
-            <p>1</p>
-            <p>2</p>
-            <p>3</p>
-            <p>...</p>
-            <p>{{ props.pageCount }}</p>
-		</div>
-
-		<div v-if="!(props.page<=2)||((props.pageCount-props.page)<=2)"  id="page_select">
-            <p>1</p>
-            <p>...</p>
-            <p>{{ props.page-1 }}</p>
-            <p>{{ props.page }}</p>
-            <p>{{ props.page+1 }}</p>
-            <p>...</p>
-            <p>{{ props.pageCount }}</p>
-		</div>
-
-        <div v-if="props.pageCount-props.page<=2"  id="page_select">
-            <p>1</p>
-            <p>...</p>
-            <p>{{ props.pageCount-2 }}</p>
-            <p>{{ props.pageCount-1 }}</p>
-            <p>{{ props.pageCount }}</p>
+        <div id="page_select">
+            <p v-for="page in pages" v-on:click="pageModelValue=page">
+				{{page}}
+			</p>
 		</div>
 
 
 		<div id="on_page">
 			<p id="description">
-				{{ 1 + selected * (props.page - 1) }} -
-				{{ selected * props.page }} из {{ props.count }}
+				{{ 1 + onPageValue * (props.page - 1) }} -
+				{{ onPageValue * props.page }} из {{ props.count }}
 			</p>
 
 			<p>Показывать</p>
 
 			<select
-				v-model="selected"
-				v-on:change="Update(selected)"
+				v-model="onPageModel"
 				id=""
 			>
 				<option :value="10">10</option>

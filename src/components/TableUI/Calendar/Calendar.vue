@@ -1,15 +1,15 @@
 <script setup>
 	import "./Calendar.scss";
 	import Calendar from "./Calendar.js";
-	import { ref,computed } from "vue";
+	import { ref,computed,inject } from "vue";
 	import Day from "./Day/Day.vue";
-
 
 
 	const days = ref(Calendar.GetDays());
 	const month = ref(Calendar.GetMonth()) ;
 	const year = ref(Calendar.GetYear())
 	const active = ref([]);
+	const new_drop = inject("backdrop")
 
 	const get_days = computed(()=>days.value = Calendar.GetDays())
 	const get_month = computed(()=>month.value = Calendar.GetMonth())
@@ -38,11 +38,11 @@
 </script>
 
 <template>
-	<div id="date_input">
+	<div id="date_input" v-on:mousedown="new_drop=true">
 		<p>Выберите дату...</p>
 		<img src="../../../assets/icons/calendar.svg" alt="" />
 	</div>
-	<div id="calendar">
+	<div id="calendar" v-if="new_drop">
 		<div id="prompt">
 			<p>Выберите дату</p>
 		</div>
@@ -75,8 +75,8 @@
 			/>
 		</div>
 		<div id="buttons">
-			<div id="close"><p>Отмена</p></div>
-			<div id="confirm"><p>Сохранить</p></div>
+			<div id="close" v-on:mousedown="new_drop=false"><p>Отмена</p></div>
+			<div id="confirm" v-on:mousedown="new_drop=false"><p>Сохранить</p></div>
 		</div>
 	</div>
 </template>

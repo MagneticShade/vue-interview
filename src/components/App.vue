@@ -1,51 +1,65 @@
 <script setup>
-    import "./App.scss"
+	import "./App.scss";
 	import Header from "./Header/Header.vue";
-    import Table from "./Table/Table.vue";
-    import TableUI from "./TableUI/TableUI.vue";
-    import Pagination from "./Pagination/Pagination.vue";
-    import Calendar from "./TableUI/Calendar/Calendar.vue";
-    import Requests from "./Requests.js"
-    import { onMounted, ref,watchEffect } from "vue";
+	import Table from "./Table/Table.vue";
+	import TableUI from "./TableUI/TableUI.vue";
+	import Pagination from "./Pagination/Pagination.vue";
+	import Requests from "./Requests.js";
+	import { onMounted, ref, watchEffect,provide } from "vue";
 
-    const recordsOnPage = ref(10)
-    const page = ref(1)
-    const districtId = ref("")
-    const regionId = ref("")
-    const UpdatedAt = ref("")
-    // const dowload = ref("")
-    const res = ref({})
-    const schools = ref ({})  
-    const distr = ref({})
+	const recordsOnPage = ref(10);
+	const page = ref(1);
+	const districtId = ref("");
+	const regionId = ref("");
+	const UpdatedAt = ref("");
+	// const dowload = ref("")
+	const res = ref({});
+	const schools = ref({});
+	const distr = ref({});
+    const drop = ref(false)
 
+	const loaded = ref(false);
 
-    const loaded = ref(false)
-    watchEffect(async ()=>{
-        loaded.value = false
-        let response = await Requests.GetSchools(recordsOnPage,page,districtId,regionId,UpdatedAt)
-        schools.value = response
-        loaded.value = true
-    })
+    provide( 'backdrop',  drop)
+	watchEffect(async () => {
+		loaded.value = false;
+		let response = await Requests.GetSchools(
+			recordsOnPage,
+			page,
+			districtId,
+			regionId,
+			UpdatedAt
+		);
+		schools.value = response;
+		loaded.value = true;
+	});
 
-    onMounted(async()=>{
-     res.value =  await   Requests.GetRegions()
-     distr.value = await  Requests.GetFederalDistricts()
-     
-
-    })
-
-    
-
+	onMounted(async () => {
+		res.value = await Requests.GetRegions();
+		distr.value = await Requests.GetFederalDistricts();
+	});
 </script>
 
 <template>
+        <div v-if="drop" id="backdrop" v-on:click="drop=false">
+        
+    </div>
 	<Header />
-    <main>
-        <div id="container">
-            <TableUI v-if="loaded" />
-                <Table v-if="loaded" :rows="schools.data.list" />
-            <Pagination v-if="loaded" :count="schools.data.total_count" :page="schools.data.page" :onPage="recordsOnPage" :pageCount="schools.data.pages_count" v-model="recordsOnPage"/>
-        </div>
-    </main>
-    <Calendar/>
+	<main>
+		<div id="container">
+			<TableUI v-if="loaded"/>
+			<Table v-if="loaded" :rows="schools.data.list" />
+			<Pagination
+				v-if="loaded"
+				:count="schools.data.total_count"
+				:page="schools.data.page"
+				:onPage="recordsOnPage"
+				:pageCount="schools.data.pages_count"
+				v-model:onPageModel="recordsOnPage"
+				v-model:pageModelValue="page"
+			/>
+		</div>
+	</main>
+
+
 </template>

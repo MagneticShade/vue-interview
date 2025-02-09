@@ -18,7 +18,7 @@
 			}
 		}
 	}
-	console.log(programms)
+
 </script>
 
 <template>
@@ -28,7 +28,6 @@
 				<th id="region">
 					<div class="row_container">
 						<div id="checkbox">
-							<input type="checkbox" name="" id="" />
 							<p>Регион</p>
 						</div>
 						<img src="../../assets/icons/Sort.svg" alt="" />

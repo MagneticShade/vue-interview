@@ -11,7 +11,6 @@
 		<td class="region">
 			<div class="row_container">
 				<div id="checkbox">
-					<input type="checkbox" name="" id="" />
 					<p>{{ props.region }}</p>
 				</div>
 			</div>
