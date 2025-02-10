@@ -8,31 +8,61 @@
 	const days = ref(Calendar.GetDays());
 	const month = ref(Calendar.GetMonth()) ;
 	const year = ref(Calendar.GetYear())
-	const active = ref([]);
+	const active = ref("");
 	const open = ref(false)
 	const get_days = computed(()=>days.value = Calendar.GetDays())
 	const get_month = computed(()=>month.value = Calendar.GetMonth())
 	const get_year = computed(()=>year.value = Calendar.GetYear())
 	const date = inject("date")
 
-	const Activate = (index) => {
-		if (active.value.length < 2) {
-			active.value.push(index);
-		} else {
-			active.value.splice(0);
-		}
 
-		if (active.value.length == 2 && active.value[0] > active.value[1]) {
-			let tmp = active.value[0];
-			active.value[0] = active.value[1];
-			active.value[1] = tmp
-		}
+
+	const Activate = (index) => {
+		active.value = index
 	};
+
+	function Save(){
+		let tmp
+		if(days.value[active.value].num<10){
+			tmp= `0${days.value[active.value].num}`
+		}
+		else{
+			tmp  = days.value[active.value].num
+		}
+		date.value=`${year.value}-${Calendar.GetMonthWithZero()}-${tmp}`
+		open.value=false
+	}
+
+	function Displaydate(){
+		let tmp
+		if(days.value[active.value].num<10){
+			tmp= `0${days.value[active.value].num}`
+		}
+		else{
+			tmp  = days.value[active.value].num
+		}
+		return `${tmp}  ${Calendar.GetMonthAlt()} ${year.value}`
+	}
+
+	function Close(){
+		open.value = false
+		active.value = ''
+		date.value = ''
+	}
+
+	function CalendarForward(){
+		Calendar.ForwardMonth()
+		Update()
+	}
+	function CalendarBackward(){
+		Calendar.BacwardMonth()
+		Update()
+	}
 	function Update(){
-		Calendar.ChangeMonth()
 		get_days.value
 		get_month.value
 		get_year.value
+		active.value=''
 	}
 	
 </script>
@@ -40,7 +70,7 @@
 <template>
 	<div id="input_holder">
 	<div id="date_input" v-on:mousedown="open=true">
-		<p>Выберите дату...</p>
+		<p>{{date? Displaydate():"Выберите дату..."}}</p>
 		<img src="../../../assets/icons/calendar.svg" alt="" />
 	</div>
 	<div id="calendar" v-if="open">
@@ -48,11 +78,11 @@
 			<p>Выберите дату</p>
 		</div>
 		<div id="month_select">
-			<div id="backward">
+			<div v-on:click="CalendarBackward" id="backward">
 				<img src="../../../assets/icons/backward.svg" alt="" />
 			</div>
 			<p>{{ month }} {{ year }}</p>
-			<div v-on:click="Update" id="forward">
+			<div v-on:click="CalendarForward" id="forward">
 				<img src="../../../assets/icons/forward.svg" alt="" />
 			</div>
 		</div>
@@ -76,8 +106,8 @@
 			/>
 		</div>
 		<div id="buttons">
-			<div id="close" v-on:mousedown="open=false"><p>Отмена</p></div>
-			<div id="confirm" v-on:mousedown="open=false"><p>Сохранить</p></div>
+			<div id="close" v-on:mousedown="Close"><p>Отмена</p></div>
+			<div id="confirm" v-on:mousedown="Save"><p>Сохранить</p></div>
 		</div>
 	</div>
 </div>

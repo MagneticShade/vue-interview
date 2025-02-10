@@ -5,19 +5,17 @@
 	import TableUI from "./TableUI/TableUI.vue";
 	import Pagination from "./Pagination/Pagination.vue";
 	import Requests from "./Requests.js";
-	import { onMounted, ref, watchEffect,provide } from "vue";
+	import { onMounted, ref, watchEffect,provide,computed } from "vue";
 
 	const recordsOnPage = ref(10);
 	const page = ref(1);
 	const districtId = ref("");
 	const regionId = ref("");
 	const UpdatedAt = ref("");
-	// const dowload = ref("")
 	const regions = ref({});
 	const schools = ref({});
 	const distr = ref({});
-    const drop = ref(false)
-
+	const download_link=ref('')
 	const loaded = ref(false);
 
     const uiLoaded = ref(false)
@@ -35,7 +33,19 @@
 		);
 		schools.value = response;
 		loaded.value = true;
+		generateDownloadLink.value
 	});
+
+	const generateDownloadLink = computed(async()=>{
+		let response = await Requests.GetSchools(
+			recordsOnPage,
+			page,
+			districtId,
+			regionId,
+			UpdatedAt
+		);
+		download_link.value =  response.data	
+	})
 
 	onMounted(async () => {
 		regions.value = await Requests.GetRegions();
@@ -45,13 +55,11 @@
 </script>
 
 <template>
-        <div v-if="drop" id="backdrop" v-on:click="drop=false">
         
-    </div>
 	<Header />
 	<main>
 		<div id="container">
-			<TableUI v-if="uiLoaded" v-model:regionsModel="regionId" v-model:districtsModel="districtId" :districts="distr" :regions="regions"/>
+			<TableUI v-if="uiLoaded" v-model:regionsModel="regionId" v-model:districtsModel="districtId" :districts="distr" :regions="regions" :download-link="download_link"/>
 			<Table v-if="loaded" :rows="schools.data.list" />
 			<Pagination
 				v-if="loaded"

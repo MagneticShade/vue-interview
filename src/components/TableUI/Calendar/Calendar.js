@@ -17,6 +17,21 @@ const months = [
 	"Декабрь",
 ];
 
+const months_alt = [
+	"Января",
+	"Февраля",
+	"Марта",
+	"Апреля",
+	"Мая",
+	"Июня",
+	"Июля",
+	"Августа",
+	"Сентября",
+	"Октября",
+	"Ноября",
+	"Декабря",
+];
+
 let days = []
 
 function GenerateDays(){
@@ -43,6 +58,10 @@ function GetMonth(){
     return months[monthN]
 }
 
+function GetMonthAlt(){
+    return  months_alt[monthN]
+}
+
 function GetDays(){
     return days
 }
@@ -51,7 +70,7 @@ function GetYear(){
     return year
 }
 
-function ChangeMonth(){
+function ForwardMonth(){
     
     monthN++
     if (monthN>11){
@@ -61,14 +80,35 @@ function ChangeMonth(){
     GenerateDays()
 }
 
+function BacwardMonth(){
+    monthN--
+    if (monthN<0){
+        monthN =11
+        year--
+    }
+    GenerateDays()
+}
+
 GenerateDays();
+
+function GetMonthWithZero(){
+    if(monthN+1<10){
+        return `0${monthN+1}`
+    }
+    else{
+        return monthN
+    }
+}
 
 export default {
     GenerateDays,
-    ChangeMonth,
+    ForwardMonth,
+    BacwardMonth,
     GetMonth,
+    GetMonthAlt,
     GetYear,
     GetDays,
+    GetMonthWithZero
 }
 
 

@@ -30,25 +30,21 @@
 						<div id="checkbox">
 							<p>Регион</p>
 						</div>
-						<img src="../../assets/icons/Sort.svg" alt="" />
 					</div>
 				</th>
 				<th id="name">
 					<div class="row_container">
 						<p>Название</p>
-						<img src="../../assets/icons/Sort.svg" alt="" />
 					</div>
 				</th>
 				<th id="address">
 					<div class="row_container">
 						<p>Адрес</p>
-						<img src="../../assets/icons/Sort.svg" alt="" />
 					</div>
 				</th>
 				<th id="eduLevel">
 					<div class="row_container">
 						<p>Уровень образования</p>
-						<img src="../../assets/icons/Sort.svg" alt="" />
 					</div>
 				</th>
 			</tr>

@@ -1,18 +1,19 @@
 table{
     width: 100%;
-    border: solid 4px black;
     border-collapse: collapse;
-
-
+    margin-bottom: 24px;
 }
 thead{
     background-color: #F0F0F7;
 
-    #region,#name,#address{
-        width: 439px;
+    #region{
+        width: 15%;
+    }
+    #name,#address{
+        width: 29%;
     }
     #eduLevel{
-        width: 265px;
+        width: 23%;
     }
     p{
         font-family: "Gotham Pro";
@@ -24,17 +25,22 @@ thead{
 
 tbody{
     .region,.name,.address{
-        width: 439px;
+        width: 22%;
     p{
         font-family: "Gotham Pro";
         font-size: 14px;
-        font-weight: bold;
+        font-weight: normal;
     }
 }
 }
 
+tbody>tr{
+    border-bottom:1px solid #D3D3DE ;
+}
+
 th,td{
     padding: 0 20px;
+    height: 56px;
     .row_container{
         display: flex;
         align-items: center;

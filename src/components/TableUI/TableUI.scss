@@ -1,47 +1,45 @@
-#tableHeader,#sort{
-    height: 56px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    
-    select{
-        border-radius: 10px;
-    }
+#tableHeader,
+#sort {
+	height: 56px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	margin-bottom: 24px;
 
-    #searchDownload{
+
+	#input_holder,select {
+        width: 33%;
         height: 100%;
-        width: 447px;
-        display: flex;
-        input{
-            height: 100%;
-            border-radius: 10px;
-        }
-    }
+		border-radius: 10px;
+		border-color: #D3D3DE;
+		font-family: "Gotham Pro";
+		font-size: 16px;
+		font-weight: normal;
+	}
+	select:hover{
+		background-color: #F1F4FD;
+	}
 }
 
 
-#download{
-    width: 147px;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    background-color: #16B240;
-    border-radius: 10px;
-    cursor: pointer;
+
+#download {
+	width: 147px;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	background-color: #16b240;
+	border-radius: 10px;
+	cursor: pointer;
 }
-#download:hover{
-    background-color: #24C14E;
-}
-#search{
-    width: 300px;
-    margin-right: 20px;
+#download:hover {
+	background-color: #24c14e;
 }
 
-
-h4{
-    font-size: 32px;
-    font-family: "Gotham Pro";
-    font-weight: bold;
+h4 {
+	font-size: 32px;
+	font-family: "Gotham Pro";
+	font-weight: bold;
 }
-
