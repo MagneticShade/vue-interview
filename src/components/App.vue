@@ -13,15 +13,18 @@
 	const regionId = ref("");
 	const UpdatedAt = ref("");
 	// const dowload = ref("")
-	const res = ref({});
+	const regions = ref({});
 	const schools = ref({});
 	const distr = ref({});
     const drop = ref(false)
 
 	const loaded = ref(false);
 
-    provide( 'backdrop',  drop)
-	watchEffect(async () => {
+    const uiLoaded = ref(false)
+
+	provide("date",UpdatedAt)
+
+    watchEffect(async () => {
 		loaded.value = false;
 		let response = await Requests.GetSchools(
 			recordsOnPage,
@@ -35,8 +38,9 @@
 	});
 
 	onMounted(async () => {
-		res.value = await Requests.GetRegions();
+		regions.value = await Requests.GetRegions();
 		distr.value = await Requests.GetFederalDistricts();
+        uiLoaded.value = true
 	});
 </script>
 
@@ -47,7 +51,7 @@
 	<Header />
 	<main>
 		<div id="container">
-			<TableUI v-if="loaded"/>
+			<TableUI v-if="uiLoaded" v-model:regionsModel="regionId" v-model:districtsModel="districtId" :districts="distr" :regions="regions"/>
 			<Table v-if="loaded" :rows="schools.data.list" />
 			<Pagination
 				v-if="loaded"

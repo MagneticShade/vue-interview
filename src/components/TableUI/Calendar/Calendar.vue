@@ -9,11 +9,11 @@
 	const month = ref(Calendar.GetMonth()) ;
 	const year = ref(Calendar.GetYear())
 	const active = ref([]);
-	const new_drop = inject("backdrop")
-
+	const open = ref(false)
 	const get_days = computed(()=>days.value = Calendar.GetDays())
 	const get_month = computed(()=>month.value = Calendar.GetMonth())
 	const get_year = computed(()=>year.value = Calendar.GetYear())
+	const date = inject("date")
 
 	const Activate = (index) => {
 		if (active.value.length < 2) {
@@ -38,11 +38,12 @@
 </script>
 
 <template>
-	<div id="date_input" v-on:mousedown="new_drop=true">
+	<div id="input_holder">
+	<div id="date_input" v-on:mousedown="open=true">
 		<p>Выберите дату...</p>
 		<img src="../../../assets/icons/calendar.svg" alt="" />
 	</div>
-	<div id="calendar" v-if="new_drop">
+	<div id="calendar" v-if="open">
 		<div id="prompt">
 			<p>Выберите дату</p>
 		</div>
@@ -75,8 +76,9 @@
 			/>
 		</div>
 		<div id="buttons">
-			<div id="close" v-on:mousedown="new_drop=false"><p>Отмена</p></div>
-			<div id="confirm" v-on:mousedown="new_drop=false"><p>Сохранить</p></div>
+			<div id="close" v-on:mousedown="open=false"><p>Отмена</p></div>
+			<div id="confirm" v-on:mousedown="open=false"><p>Сохранить</p></div>
 		</div>
 	</div>
+</div>
 </template>
