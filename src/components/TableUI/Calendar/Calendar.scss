@@ -93,7 +93,13 @@
 	align-items: center;
 	justify-content: space-between;
 }
-
+.disabled_input{
+	border-color:#E0E0E8;
+	pointer-events: none;
+	p{
+		color: #999999;
+	}
+}
 #close,
 #confirm {
 	width: 148px;

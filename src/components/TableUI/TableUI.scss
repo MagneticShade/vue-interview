@@ -37,6 +37,17 @@
 #download:hover {
 	background-color: #24c14e;
 }
+.main_button_disabled{
+	
+	background-color: #0E0E10 !important;
+	cursor: auto !important;
+	p{
+		color: #F1F4FD !important;
+	}
+	img{
+		filter: invert(1);
+	}
+}
 
 h4 {
 	font-size: 32px;

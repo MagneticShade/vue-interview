@@ -24,6 +24,7 @@
 
 	onPageModel.value = props.onPage;
 	let pages = [pageModelValue.value];
+	if(props.count>1){
 	if (pageModelValue.value < 3) {
 		for (let i = pageModelValue.value - 1; i >= 1; i--) {
 			pages.unshift(i);
@@ -54,6 +55,7 @@
 		pages.unshift("...");
 		pages.unshift(1);
 	}
+}
 </script>
 
 <template>

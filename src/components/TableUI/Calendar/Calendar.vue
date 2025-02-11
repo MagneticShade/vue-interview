@@ -1,7 +1,7 @@
 <script setup>
 	import "./Calendar.scss";
 	import Calendar from "./Calendar.js";
-	import { ref,computed,inject } from "vue";
+	import { ref,computed,inject,watch } from "vue";
 	import Day from "./Day/Day.vue";
 
 
@@ -14,8 +14,7 @@
 	const get_month = computed(()=>month.value = Calendar.GetMonth())
 	const get_year = computed(()=>year.value = Calendar.GetYear())
 	const date = inject("date")
-
-
+	const disabled = inject("disabled")
 
 	const Activate = (index) => {
 		active.value = index
@@ -44,6 +43,7 @@
 		return `${tmp}  ${Calendar.GetMonthAlt()} ${year.value}`
 	}
 
+	
 	function Close(){
 		open.value = false
 		active.value = ''
@@ -64,12 +64,19 @@
 		get_year.value
 		active.value=''
 	}
+
+	watch(disabled,()=>{
+		if(disabled.value==true){
+			open.value=false
+			active.value = ''
+		}
+	})
 	
 </script>
 
 <template>
 	<div id="input_holder">
-	<div id="date_input" v-on:mousedown="open=true">
+	<div id="date_input":class="disabled? 'disabled_input':''" v-on:mousedown="disabled? '':open=true">
 		<p>{{date? Displaydate():"Выберите дату..."}}</p>
 		<img src="../../../assets/icons/calendar.svg" alt="" />
 	</div>

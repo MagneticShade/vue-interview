@@ -25,9 +25,14 @@ async function GetSchools(count,page,districtId,regionId,updatedAt,download){
         "updated_at":updatedAt? toValue(updatedAt):"",
         "download":download? toValue(download):""
     }).toString()).then((response)=>{
+        if (response.ok){
         return response.json()
+        }
+        else{
+            console.log(response.status)
+            return response.status
+        }
     })
-
     return  result
 }
 
