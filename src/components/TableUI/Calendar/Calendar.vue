@@ -81,7 +81,7 @@
 			<div v-on:click="CalendarBackward" id="backward">
 				<img src="../../../assets/icons/backward.svg" alt="" />
 			</div>
-			<p>{{ month }} {{ year }}</p>
+			<p id="selected_date">{{ month }} {{ year }}</p>
 			<div v-on:click="CalendarForward" id="forward">
 				<img src="../../../assets/icons/forward.svg" alt="" />
 			</div>

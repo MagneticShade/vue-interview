@@ -20,6 +20,6 @@
 			    CheckActive() ? 'active_day' : '',
 			]"
 		>
-			{{ props.day.num }}
+			<p>{{ props.day.num }} </p>
 		</div>
 </template>

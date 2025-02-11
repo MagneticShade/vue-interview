@@ -1,6 +1,5 @@
 <script setup>
     import "./TableUI.scss"
-    import "./TableUI" 
     import Calendar from "./Calendar/Calendar.vue"
     const props = defineProps(["regions","districts","downloadlink"])
     const regionsModel = defineModel("regionsModel")

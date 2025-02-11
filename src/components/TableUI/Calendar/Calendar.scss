@@ -42,12 +42,31 @@
 	position: relative;
 }
 #prompt {
-	border-bottom: solid black 1px;
+	border-bottom: solid #D3D3DE 1px;
+	p{
+		font-family: "Manrope";
+		font-weight: 700;
+		font-size: 20px;
+		color: #111827;
+		margin-bottom:16px;
+	}
 }
 #month_select{
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+	p{
+		font-family: "Manrope";
+		font-weight: 600;
+		font-size: 16px;
+	}
+}
+
+#week_days{
+	p{
+		color: #93939B;
+	}
 }
 #week_days,
 #days {
