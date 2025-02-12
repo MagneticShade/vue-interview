@@ -51,7 +51,6 @@ function GenerateDays(){
 
     for (let i = 1;days.length<42;i++){
         days.push({"num":i,"disabled":true})
-        console.log("aaa")
     }
 }
 

@@ -29,7 +29,6 @@ async function GetSchools(count,page,districtId,regionId,updatedAt,download){
         return response.json()
         }
         else{
-            console.log(response.status)
             return response.status
         }
     })
