@@ -49,8 +49,9 @@ function GenerateDays(){
         days.push({"num":i,"disabled":false})
     }
 
-    for (let i = curMonthLastWeekDay;i<=6;i++){
-        days.push({"num":i-curMonthLastWeekDay+1,"disabled":true})
+    for (let i = 1;days.length<42;i++){
+        days.push({"num":i,"disabled":true})
+        console.log("aaa")
     }
 }
 
